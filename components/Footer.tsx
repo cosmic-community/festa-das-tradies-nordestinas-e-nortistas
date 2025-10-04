@@ -53,8 +53,7 @@ export default function Footer() {
         </div>
         
         <div className="border-t border-gray-700 pt-8 text-center text-gray-400">
-          <p>© {currentYear} Festa das Tradições Nordestinas e Nortistas. Todos os direitos reservados.</p>
-          <p className="mt-2 text-sm">
+          <p className="text-sm">
             Que a alegria e a esperança nunca nos faltem! ✨
           </p>
         </div>
