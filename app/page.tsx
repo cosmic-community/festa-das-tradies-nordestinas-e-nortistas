@@ -1,7 +1,6 @@
 import { cosmic, hasStatus } from '@/lib/cosmic'
-import { Post, Category } from '@/types'
+import { Post } from '@/types'
 import PostCard from '@/components/PostCard'
-import CategoryFilter from '@/components/CategoryFilter'
 
 async function getPosts(): Promise<Post[]> {
   try {
@@ -27,26 +26,8 @@ async function getPosts(): Promise<Post[]> {
   }
 }
 
-async function getCategories(): Promise<Category[]> {
-  try {
-    const response = await cosmic.objects
-      .find({
-        type: 'categories'
-      })
-      .props(['id', 'title', 'slug', 'metadata'])
-    
-    return response.objects as Category[]
-  } catch (error) {
-    if (hasStatus(error) && error.status === 404) {
-      return []
-    }
-    throw error
-  }
-}
-
 export default async function Home() {
   const posts = await getPosts()
-  const categories = await getCategories()
   
   return (
     <div>
@@ -70,15 +51,6 @@ export default async function Home() {
           </div>
         </div>
       </section>
-      
-      {/* Categories Section */}
-      {categories.length > 0 && (
-        <section className="py-12 bg-gray-50">
-          <div className="container mx-auto px-4">
-            <CategoryFilter categories={categories} />
-          </div>
-        </section>
-      )}
       
       {/* Posts Section */}
       <section className="py-16">
